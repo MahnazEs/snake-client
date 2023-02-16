@@ -1,4 +1,5 @@
-const net = require("net");
+const net = require('net');
+//const {IP, PORT, NAME} = require('./constants');
 
 
 const connect = function () {
@@ -7,7 +8,9 @@ const connect = function () {
     port: '50541'
   });
 
-
+  conn.on('connect', (connect) => {
+    console.log('Snake Game Server says >>');
+  });
 
   conn.setEncoding("utf8");
   //connect to server with name
@@ -15,6 +18,11 @@ const connect = function () {
     console.log("Successfully connected to game server");
     conn.write("Name: MAH");
   });
+  
+  conn.on('data', (data) => {
+    console.log('You are done!!!');
+  });
+
 
   //get data from server
   conn.on('data', (messageFromTheServer) => {
